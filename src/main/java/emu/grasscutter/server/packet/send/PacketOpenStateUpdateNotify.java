@@ -20,6 +20,30 @@ public class PacketOpenStateUpdateNotify extends BasePacket {
         OpenStateUpdateNotify.Builder proto = OpenStateUpdateNotify.newBuilder();
 
         GameData.getOpenStateList().stream().map(OpenStateData::getId).forEach(id -> {
+            
+            // 将所有OpenState的状态改为1 也就是全部打开 与/unlockall效果相同
+            proto.putOpenStateMap(id, 1);
+
+            /* 单id示例
+            // 聊天
+            if (id == 1){
+                proto.putOpenStateMap(1, 1);
+                return;
+            }
+            // 抽卡
+            if (id == 31){
+                proto.putOpenStateMap(31, 1);
+                return;
+            }
+
+            // 地图边界
+            if (id == 47){
+                proto.putOpenStateMap(47, 1);
+                return;
+            }
+            */
+
+            // 树脂
             if ((id == 45) && !GAME_OPTIONS.resinOptions.resinUsage) {
                 proto.putOpenStateMap(45, 0);  // Remove resin from map
                 return;
