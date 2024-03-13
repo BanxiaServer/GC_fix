@@ -1,98 +1,66 @@
-![Grasscutter](https://socialify.git.ci/Grasscutters/Grasscutter/image?description=1&forks=1&issues=1&language=1&logo=https%3A%2F%2Fs2.loli.net%2F2022%2F04%2F25%2FxOiJn7lCdcT5Mw1.png&name=1&owner=1&pulls=1&stargazers=1&theme=Light)
-<div align="center"><img alt="Documentation" src="https://img.shields.io/badge/Wiki-Grasscutter-blue?style=for-the-badge&link=https://github.com/Grasscutters/Grasscutter/wiki&link=https://github.com/Grasscutters/Grasscutter/wiki"> <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/Grasscutters/Grasscutter?logo=java&style=for-the-badge"> <img alt="GitHub" src="https://img.shields.io/github/license/Grasscutters/Grasscutter?style=for-the-badge"> <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Grasscutters/Grasscutter?style=for-the-badge"> <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Grasscutters/Grasscutter/build.yml?branch=development&logo=github&style=for-the-badge"></div>
+- 这是我们半夏公益服使用的部分核心文件
 
-<div align="center"><a href="https://discord.gg/T5vZU6UyeG"><img alt="Discord - Grasscutter" src="https://img.shields.io/discord/965284035985305680?label=Discord&logo=discord&style=for-the-badge"></a></div>
+- 这个仓库存在的目的只有一个——优化玩家在获得大量物品时服务器的cpu占用率
 
-[EN](README.md) | [简中](docs/README_zh-CN.md) | [繁中](docs/README_zh-TW.md) | [FR](docs/README_fr-FR.md) | [ES](docs/README_es-ES.md) | [HE](docs/README_HE.md) | [RU](docs/README_ru-RU.md) | [PL](docs/README_pl-PL.md) | [ID](docs/README_id-ID.md) | [KR](docs/README_ko-KR.md) | [FIL/PH](docs/README_fil-PH.md) | [NL](docs/README_NL.md) | [JP](docs/README_ja-JP.md) | [IT](docs/README_it-IT.md) | [VI](docs/README_vi-VN.md)
+- 原版gc在玩家使用 /give all 指令时会将cpu占满 且还会持续几秒到十几秒的高占用率
 
-**Attention:** We always welcome contributors to the project. Before adding your contribution, please carefully read our [Code of Conduct](https://github.com/Grasscutters/Grasscutter/blob/stable/CONTRIBUTING.md).
+- 现在使用此仓库的核心 玩家在使用 /give all 指令时只会占用不到百分之五的cpu
 
-## Current features
+- [创建这个仓库的原因](https://github.com/Grasscutters/Grasscutter/issues/2458)
 
-* Logging in
-* Combat
-* Friends list
-* Teleportation
-* Gacha system
-* Co-op *partially* works
-* Spawning monsters via console
-* Inventory features (receiving items/characters, upgrading items/characters, etc)
+- 本仓库使用的所有代码均来自官方核心 我只是对部分代码进行了取舍以修复hyper分支的注册问题+玩家重进游戏不储存背包物品和dev分支的高cpu占用问题
 
-## Quick setup guide
+- 可以点击[这里](https://github.com/BanxiaServer/Grasscutter/actions/workflows/build.yml)下载自动编译的核心
+- 如果开一段时间后就崩服 且控制台输入什么都没有反应 则代表着默认分配的内存已被消耗完 可以将启动代码改为`java -Xms初始分配的内存g -Xmx分配最大内存g -jar 核心名字.jar` 来增加分配给gc使用的内存 内存泄露是原版gc就存在的问题 我无法修复
 
-**Note**: For support please join our [Discord](https://discord.gg/T5vZU6UyeG).
 
-### Quick Start (automatic)
 
-- Get Java 17: https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
-- Get [MongoDB Community Server](https://www.mongodb.com/try/download/community)
-- Get game version REL4.0.x (4.0.x client can be found here if you don't have it): https://github.com/JRSKelvin/GenshinRepository/blob/main/Version%204.0.0.md
+---
 
-- Download the [latest Cultivation version](https://github.com/Grasscutters/Cultivation/releases/latest). Use the `.msi` installer.
-- After opening Cultivation (as admin), press the download button in the upper right corner. 
-- Click `Download All-in-One`
-- Click the gear in the upper right corner
-- Set the game Install path to where your game is located.
-- Set the Custom Java Path to `C:\Program Files\Java\jdk-17\bin\java.exe`
-- Leave all other settings on default
+### 快速开始（全自动）
 
-- Click the small button next to launch.
-- Click the launch button.
-- Log in with whatever username you want. Password can be anything.
+- 获取Java 17：https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+- 获取[MongoDB社区版](https://www.mongodb.com/try/download/community)
+- 获取游戏4.0正式版 (如果你没有4.0的客户端，可以在这里找到）：https://github.com/MAnggiarMustofa/GI-Download-Library/blob/main/GenshinImpact/Client/4.0.0.md)
 
-### Building
+- 下载[最新的Cultivation版本](https://github.com/Grasscutters/Cultivation/releases/latest)（使用以“.msi”为后缀的安装包）。
+- 以管理员身份打开Cultivation，按右上角的下载按钮。
+- 点击“下载 Grasscutter 一体化”
+- 点击右上角的齿轮
+- 将游戏安装路径设置为你游戏所在的位置。
+- 将自定义Java路径设置为`C:\Program Files\Java\jdk-17\bin\java.exe`
+- 保持所有其它设置为默认值
 
-Grasscutter uses Gradle to handle dependencies & building.
+- 点击“启动”按钮旁边的小按钮。
+- 点击“启动”按钮。
+- 随便想一个用户名登录，不需要密码。
 
-**Requirements:**
+### 构建
 
-- [Java Development Kit 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or higher
+Grasscutter使用Gradle来处理依赖和构建。
+
+**前置：**
+
+- [Java SE Development Kits - 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)或更高版本
 - [Git](https://git-scm.com/downloads)
-- [NodeJS](https://nodejs.org/en/download) (Optional, for building the handbook)
 
-##### Clone
+##### Windows
 
 ```shell
 git clone --recurse-submodules https://github.com/Grasscutters/Grasscutter.git
 cd Grasscutter
+.\gradlew.bat # 设置开发环境
+.\gradlew jar # 编译
 ```
 
-##### Compile
-
-**Note**: Handbook generation may fail on some systems. To disable the handbook generation, append `-PskipHandbook=1` to the `gradlew jar` command.
-
-Windows:
-
-```shell
-.\gradlew.bat # Setting up environments
-.\gradlew jar
-```
-
-Linux (GNU):
+##### Linux（GNU）
 
 ```bash
+git clone --recurse-submodules https://github.com/Grasscutters/Grasscutter.git
+cd Grasscutter
 chmod +x gradlew
-./gradlew jar
+./gradlew jar # 编译
 ```
 
-##### Compiling the Handbook (Manually)
+你可以在项目的根目录找到输出的jar。
 
-With Gradle:
-
-```shell
-./gradlew generateHandbook
-```
-
-With NPM:
-
-```shell
-cd src/handbook
-npm install
-npm run build
-```
-
-You can find the output jar in the root of the project folder.
-
-### Troubleshooting 
-
-For a list of common issues and solutions and to ask for help, please join [our Discord server](https://discord.gg/T5vZU6UyeG) and go to the support channel.
