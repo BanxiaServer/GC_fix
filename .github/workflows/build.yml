@@ -8,6 +8,7 @@ on:
       - "stable"
       - "development"
       - "unstable"
+      - "cpu_fix"
   pull_request:
     paths:
       - "**.java"
